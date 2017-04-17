@@ -71,12 +71,19 @@ monthly_rate= @apr/1200
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = "Replace this string with your answer."
-    @minutes = "Replace this string with your answer."
-    @hours = "Replace this string with your answer."
-    @days = "Replace this string with your answer."
-    @weeks = "Replace this string with your answer."
-    @years = "Replace this string with your answer."
+    @seconds = @ending-@starting
+    @minutes = (@ending-@starting)/(60)
+
+time_between_in_minutes=(@ending-@starting)/(60)
+
+
+
+    @hours = time_between_in_minutes/60
+
+
+    @days = @hours/24
+    @weeks = @days/7
+    @years = @weeks/365
 
     # ================================================================================
     # Your code goes above.
@@ -93,21 +100,36 @@ monthly_rate= @apr/1200
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer."
 
-    @count = "Replace this string with your answer."
+    @sorted_numbers = @numbers.sort
 
-    @minimum = "Replace this string with your answer."
+    @count = @numbers.count
 
-    @maximum = "Replace this string with your answer."
+    @minimum = @numbers.min
 
-    @range = "Replace this string with your answer."
+    @maximum = @numbers.max
 
-    @median = "Replace this string with your answer."
+    @range = @maximum-@minimum
 
-    @sum = "Replace this string with your answer."
+@Length = @sorted_numbers.length
+@B = @Length/2
+@C = @B-1
+if @Length % 2 ==1
+  @median=@sorted_numbers[@Length/2]
+else @median=@sorted_numbers[(@B+@C)/2]
 
-    @mean = "Replace this string with your answer."
+
+end
+
+
+
+    @median = @numbers.sort
+
+
+
+    @sum = @numbers.sum
+
+    @mean = @sum/@count
 
     @variance = "Replace this string with your answer."
 

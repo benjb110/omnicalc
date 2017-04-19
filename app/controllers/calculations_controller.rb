@@ -83,7 +83,7 @@ time_between_in_minutes=(@ending-@starting)/(60)
 
     @days = @hours/24
     @weeks = @days/7
-    @years = @weeks/365
+    @years = @weeks/52
 
     # ================================================================================
     # Your code goes above.
@@ -111,19 +111,26 @@ time_between_in_minutes=(@ending-@starting)/(60)
 
     @range = @maximum-@minimum
 
-@Length = @sorted_numbers.length
-@B = @Length/2
-@C = @B-1
-if @Length % 2 ==1
-  @median=@sorted_numbers[@Length/2]
-else @median=@sorted_numbers[(@B+@C)/2]
-
-
-end
 
 
 
-    @median = @numbers.sort
+
+  @Length = @sorted_numbers.length
+    @A = (@Length)/(2)
+    @B = @sorted_numbers[@A]
+    @C = @sorted_numbers[(@A-1)]
+    @D = (@B+@C)/2
+
+    if @Length % 2 ==0
+      @median= @D
+
+    else
+        @median= @sorted_numbers[@Length/2]
+
+
+
+
+    end
 
 
 
@@ -131,11 +138,24 @@ end
 
     @mean = @sum/@count
 
-    @variance = "Replace this string with your answer."
+    @Squared_Numbers=[]
+    @numbers.each do |num|
+      var_each=(num-@mean)**2
+      @Squared_Numbers.push(var_each)
+    end
 
-    @standard_deviation = "Replace this string with your answer."
+@Sum_of_Squares=@Squared_Numbers.sum
+    @variance = @Sum_of_Squares/@count
 
-    @mode = "Replace this string with your answer."
+    @standard_deviation = Math.sqrt(@variance)
+
+hash = Hash.new(0)
+@numbers.each do |i|
+  hash[i]+=1
+end
+
+
+    @mode = ""
 
     # ================================================================================
     # Your code goes above.

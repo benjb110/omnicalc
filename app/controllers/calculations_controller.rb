@@ -2,6 +2,9 @@ class CalculationsController < ApplicationController
 
   def word_count
     @text = params[:user_text]
+
+
+
     @special_word = params[:user_word]
 
     # ================================================================================
@@ -11,7 +14,15 @@ class CalculationsController < ApplicationController
     # ================================================================================
 
 
-text_split_into_array = @text.split
+    text_split_into_array = @text.gsub(/[^a-z0-9\s]/i,"").downcase.split
+    @occurences = 0
+
+    text_split_into_array.each do |word|
+      if word ==@special_word.downcase
+        @occurences += 1
+      end
+    end 
+
 
     @word_count = text_split_into_array.length
 
@@ -44,7 +55,7 @@ text_split_into_array = @text.split
     # ================================================================================
 
 
-monthly_rate= @apr/1200
+    monthly_rate= @apr/1200
 
 
 
@@ -74,7 +85,7 @@ monthly_rate= @apr/1200
     @seconds = @ending-@starting
     @minutes = (@ending-@starting)/(60)
 
-time_between_in_minutes=(@ending-@starting)/(60)
+    time_between_in_minutes=(@ending-@starting)/(60)
 
 
 
@@ -115,7 +126,7 @@ time_between_in_minutes=(@ending-@starting)/(60)
 
 
 
-  @Length = @sorted_numbers.length
+    @Length = @sorted_numbers.length
     @A = (@Length)/(2)
     @B = @sorted_numbers[@A]
     @C = @sorted_numbers[(@A-1)]
@@ -125,7 +136,7 @@ time_between_in_minutes=(@ending-@starting)/(60)
       @median= @D
 
     else
-        @median= @sorted_numbers[@Length/2]
+      @median= @sorted_numbers[@Length/2]
 
 
 
@@ -144,18 +155,21 @@ time_between_in_minutes=(@ending-@starting)/(60)
       @Squared_Numbers.push(var_each)
     end
 
-@Sum_of_Squares=@Squared_Numbers.sum
+    @Sum_of_Squares=@Squared_Numbers.sum
     @variance = @Sum_of_Squares/@count
 
     @standard_deviation = Math.sqrt(@variance)
 
-hash = Hash.new(0)
-@numbers.each do |i|
-  hash[i]+=1
-end
+    hash = Hash.new(0)
+    @numbers.each do |i|
+      hash[i]+=1
+    end
 
 
-    @mode = ""
+    freq = @numbers.inject(Hash.new(0)) { |h,v| h[v] +=1; h}
+    mode = @numbers.max_by { |v| freq[v] }
+
+    @mode = mode
 
     # ================================================================================
     # Your code goes above.
